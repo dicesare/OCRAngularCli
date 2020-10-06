@@ -7,9 +7,24 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   isAuth = false;
+  appareils = [
+    {
+      name: 'Machine à laver',
+      status: 'allumé'
+    },
+    {
+      name: 'Frigo',
+      status: 'allumé'
+    },
+    {
+      name: 'Ordinateur',
+      status: 'éteint'
+    }
+  ];
+  /* //ceci a ete fait avant la creation du tableau pour tester la ngFor
   appareilOne = 'Machine à laver';
   appareilTwo = 'Frigo';
-  appareilThree = 'Ordinateur';
+  appareilThree = 'Ordinateur';*/
   constructor() {
     setTimeout(
       () => {

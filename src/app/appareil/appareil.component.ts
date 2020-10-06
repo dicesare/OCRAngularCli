@@ -15,4 +15,13 @@ export class AppareilComponent implements OnInit {
   getStatus(): string {
     return this.appareilStatus;
   }
+
+  // tslint:disable-next-line:typedef
+  getColor() {
+    if (this.appareilStatus === 'allumé') {
+      return 'green';
+    } else if (this.appareilStatus === 'éteint') {
+      return 'red';
+    }
+  }
 }
