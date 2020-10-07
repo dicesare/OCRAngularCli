@@ -7,6 +7,19 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   isAuth = false;
+  /*Dans le code ci-dessous on utilise la methode promise () qui permet l'utilisation asynchrone
+  * par exemple lorsque on doit interroger un seveur distant ( pensez dans notre cas à stipuler
+  * dans le HTML a que date est ASYNC */
+  lastUpdate = new Promise(
+    ((resolve, reject) => {
+      const date = new Date();
+      setTimeout(
+        () => {
+          resolve(date);
+        }, 2000
+      );
+    })
+  );
   appareils = [
     {
       name: 'Machine à laver',

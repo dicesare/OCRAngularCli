@@ -2,6 +2,9 @@
   <div class="row">
     <div class="col-xs-12">
       <h2>Mes appareils</h2>
+      <!-- Chapitre sur les pipi important: l'ordre des Pipe !!! la donnée async fait reference a la fonction Promise()
+      du component-->
+      <p>Mis à jour : {{ lastUpdate | async | date: 'EEEE d MMMM y' | uppercase }}</p>
       <ul class="list-group">
         <!--le code ci dessous fut utiliser avant la creation du tableau pour les les directives structureles
         <app-appareil [appareilName]="appareilOne" [appareilStatus]="'éteint'"></app-appareil>
