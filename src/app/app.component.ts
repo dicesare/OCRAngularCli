@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AppareilService} from './services/appareil.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   isAuth = false;
   /*Dans le code ci-dessous on utilise la methode promise () qui permet l'utilisation asynchrone
   * par exemple lorsque on doit interroger un seveur distant ( pensez dans notre cas à stipuler
@@ -20,25 +21,12 @@ export class AppComponent {
       );
     })
   );
-  appareils = [
-    {
-      name: 'Machine à laver',
-      status: 'allumé'
-    },
-    {
-      name: 'Frigo',
-      status: 'allumé'
-    },
-    {
-      name: 'Ordinateur',
-      status: 'éteint'
-    }
-  ];
+  appareils: any[];
   /* //ceci a ete fait avant la creation du tableau pour tester la ngFor
   appareilOne = 'Machine à laver';
   appareilTwo = 'Frigo';
   appareilThree = 'Ordinateur';*/
-  constructor() {
+  constructor(private appareilService: AppareilService) {
     setTimeout(
       () => {
         this.isAuth = true;
@@ -46,8 +34,17 @@ export class AppComponent {
     );
   }
 
+  ngOnInit(): void {
+    this.appareils = this.appareilService.appareils;
+  }
+
   // tslint:disable-next-line:typedef
   onAllumer() {
-    console.log('on allume tout !');
+    this.appareilService.switchOnAll();
+  }
+
+  // tslint:disable-next-line:typedef
+  onEteindre() {
+    this.appareilService.switchOffAll();
   }
 }
