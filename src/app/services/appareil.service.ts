@@ -1,5 +1,8 @@
+import {Subject} from 'rxjs';
+
 export class AppareilService {
-  appareils = [
+  appareilSubject = new Subject<any[]>();
+  private appareils = [
     {
       id: 1,
       name: 'Machine à laver',
@@ -16,6 +19,9 @@ export class AppareilService {
       status: 'éteint'
     }
   ];
+  emitAppareilSubject() {
+    this.appareilSubject.next(this.appareils.slice());
+  }
   // tslint:disable-next-line:typedef
   getAppareilById(id: number) {
     const appareil = this.appareils.find(
@@ -30,19 +36,23 @@ export class AppareilService {
     for (const appareil of this.appareils) {
       appareil.status = 'allumé';
     }
+    this.emitAppareilSubject();
   }
   // tslint:disable-next-line:typedef
   switchOffAll() {
     for (const appareil of this.appareils) {
       appareil.status = 'éteint';
     }
+    this.emitAppareilSubject();
   }
   // tslint:disable-next-line:typedef
   switchOnOne(index: number){
     this.appareils[index].status = 'allumé';
+    this.emitAppareilSubject();
   }
   // tslint:disable-next-line:typedef
   switchOffOne(index: number){
       this.appareils[index].status = 'éteint';
+    this.emitAppareilSubject();
   }
 }

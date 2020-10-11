@@ -1,13 +1,33 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AppareilService} from './services/appareil.service';
+import { Subscription, Observable } from 'rxjs';
+// tslint:disable-next-line:import-blacklist
+import 'rxjs/add/observable/interval';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent{
+/* ce qui suit est danse le chapitre sur les observables avec RxJS*/
+export class AppComponent implements OnInit, OnDestroy {
   constructor() {
+  }
+  secondes: number;
+  couterSubscription: Subscription;
+
+  ngOnInit(): void {
+      const counter = Observable.interval(1000);
+      this.couterSubscription = counter.subscribe(
+        (value ) => {
+          this.secondes = value;
+        }
+      );
+    }
+
+  ngOnDestroy(): void {
+    this.couterSubscription.unsubscribe();
   }
   /* tout se code fut ecrit lors de la partie precedent le routing */
   // isAuth = false;
